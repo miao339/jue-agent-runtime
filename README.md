@@ -1,34 +1,36 @@
 # Jue Agent Runtime
 
-Jue Agent Runtime is a judgment layer for agent systems. This repository contains the current Claude Code adapter and runtime implementation.
+中文 | [English](./README_EN.md)
 
-Jue is not a normal prompt pack and not a normal workflow engine. Its goal is to help an agent keep judgment during real tasks: why it is doing something, when it should ask, when it should stop, when it should switch into a more suitable domain judgment subject, and when it should admit uncertainty.
+Jue Agent Runtime 是一个面向 Agent 系统的判断层。这个仓库保存当前可运行的 Claude Code 适配器和 Jue 运行时实现。
 
-## Core Idea
+Jue 不是普通提示词包，也不是传统工作流引擎。它关注的是让 Agent 在真实任务中保持判断力：为什么这样做，什么时候该问，什么时候该停，什么时候该切换到更合适的领域判断主体，以及什么时候应该承认不确定。
 
-Most agents accumulate methods: how to use a tool, how to follow a workflow, how to complete a task. Jue accumulates judgment reasons: in what situation a judgment was made, why that judgment made sense, and what reusable structure can be carried into future tasks.
+## 核心理念
 
-In vertical domains such as coding, law, sales strategy, research, or operations, the hard part is often not tool use. The hard part is knowing what matters, what is uncertain, what evidence is missing, whether the user intent is being understood correctly, and whether the agent is merely following its own momentum or over-agreeing with the user.
+多数 Agent 积累的是方法：怎么调用工具，怎么遵循流程，怎么完成任务。Jue 积累的是判断理由：在什么情境下做出了什么判断，为什么这个判断成立，以及这个判断背后的结构能不能带到未来任务里继续使用。
 
-Jue gives the model a source and direction for judgment. A useful agent should not only continue executing. When uncertain, it should be able to say it is uncertain, slow down, and ask the user why.
+在代码、法律、销售策略、研究、运营等垂直领域里，难点往往不只是会不会用工具。真正难的是知道什么重要、哪里不确定、缺少什么证据、有没有真正理解用户意图，以及 Agent 是不是只是在沿着自己的惯性执行，或者过度附和用户。
 
-## Runtime Structure
+Jue 给模型提供判断力的来源和方向。一个有用的 Agent 不应该只是继续执行。当它不确定时，它应该能承认不确定，慢下来，并向用户追问为什么。
 
-The current runtime includes:
+## 运行时结构
 
-- `ROOT_PARADIGM`: the root judgment frame.
-- `SOUL`: the default judgment texture.
-- `Harness3`: domain judgment subjects, such as code, law, or sales strategy.
-- `JudgmentTriplet`: reusable records of situation, judgment, and structure.
-- Hooks: Claude Code hook integration for session start, user prompt submit, compaction, and tool batch boundaries.
-- MCP tool: a `river_harness` tool for recording triplets, searching judgment records, activating harnesses, generating harnesses, and evolving harnesses.
-- Status line: optional active-harness display for Claude Code.
+当前运行时包括：
 
-The runtime stores state outside the repository by default, under `~/.jue-claude-code`, unless `JUE_STATE_DIR` is provided.
+- `ROOT_PARADIGM`：根判断框架。
+- `SOUL`：默认判断底色。
+- `Harness3`：领域判断主体，例如代码、法律、销售策略。
+- `JudgmentTriplet`：可复用的判断记录，包含情境、判断和结构。
+- Hooks：接入 Claude Code 的 session start、user prompt submit、compaction、tool batch 等时机。
+- MCP 工具：`river_harness`，用于记录 triplet、搜索判断记录、激活 harness、生成 harness、进化 harness。
+- 状态栏：可选的 Claude Code 当前活跃 harness 显示。
 
-## Current Adapter
+运行时默认把状态保存在仓库外部的 `~/.jue-claude-code`，除非用户主动设置 `JUE_STATE_DIR`。
 
-This repository currently ships a Claude Code plugin adapter:
+## 当前适配器
+
+这个仓库当前提供 Claude Code 插件适配器：
 
 - `.claude-plugin/plugin.json`
 - `.mcp.json`
@@ -38,30 +40,30 @@ This repository currently ships a Claude Code plugin adapter:
 - `scripts/`
 - `seed/harness3/`
 
-The design is intentionally adapter-friendly. The Jue judgment runtime can later be connected to Codex, Claude Code, or other agent platforms through MCP or other adapter interfaces.
+整体设计会尽量保持适配器友好。后续 Jue 判断运行时可以通过 MCP 或其他适配接口接入 Codex、Claude Code，或者其他 Agent 平台。
 
-## Install Locally
+## 本地安装
 
-Install dependencies:
+安装依赖：
 
 ```powershell
 cd path\to\jue-agent-runtime
 npm install
 ```
 
-Launch Claude Code with the local plugin:
+用本地插件启动 Claude Code：
 
 ```powershell
 .\bin\claude-jue.ps1
 ```
 
-Or launch directly:
+也可以直接启动：
 
 ```powershell
 claude --plugin-dir . --agent jue:jue --append-system-prompt-file .\root\BOOTSTRAP.md
 ```
 
-Admin commands:
+管理命令：
 
 ```powershell
 npm run jue -- status
@@ -70,32 +72,32 @@ npm run jue -- activate code-craft
 npm run jue -- deactivate
 ```
 
-## Validation
+## 验证
 
 ```powershell
 npm test
 claude plugin validate .
 ```
 
-`claude plugin validate .` requires Claude Code to be installed and available on `PATH`.
+`claude plugin validate .` 需要本机已经安装 Claude Code，并且可以在 `PATH` 中直接调用 `claude`。
 
-## License
+## 许可证
 
-This repository is source-available, not OSI open source.
+这个仓库是 source-available，不是 OSI 意义上的开源项目。
 
-Non-commercial use is permitted under the [PolyForm Noncommercial License 1.0.0](./LICENSE).
+非商业使用允许遵循 [PolyForm Noncommercial License 1.0.0](./LICENSE)。
 
-Commercial use requires prior written authorization from River (Zuduo Wei). Commercial use includes, but is not limited to:
+商业使用需要提前获得 River（韦祖舵）的书面授权。商业使用包括但不限于：
 
-- using Jue, Harness3, JudgmentTriplet, ROOT_PARADIGM, SOUL, or related runtime mechanisms in a paid product or service
-- integrating this project into SaaS, consulting delivery, enterprise deployment, client projects, internal business systems, or commercial AI agents
-- selling, reselling, hosting, or providing this project or its judgment-system components as part of a paid offering
+- 在付费产品或服务中使用 Jue、Harness3、JudgmentTriplet、ROOT_PARADIGM、SOUL 或相关运行机制
+- 将本项目集成到 SaaS、咨询交付、企业部署、客户项目、内部业务系统或商业 AI Agent 中
+- 将本项目或其中的判断系统组件作为付费产品的一部分进行销售、转售、托管或提供服务
 
-See [LICENSE](./LICENSE) for details.
+详情见 [LICENSE](./LICENSE)。
 
-## Project Status
+## 项目状态
 
-This is an early public runtime. It is being actively refactored toward a cleaner structure:
+这是早期公开运行时版本，正在向更清晰的结构重构：
 
 ```text
 ROOT_SOUL
@@ -105,4 +107,4 @@ ROOT_SOUL
 + small_soul heartbeat
 ```
 
-The current repository preserves the working Claude Code implementation while the cleaner runtime abstraction is being prepared.
+当前仓库保留了已经跑通的 Claude Code 实现，同时后续会继续抽象出更干净的通用运行时。
