@@ -1,0 +1,27 @@
+{
+  "harness_id": "harness-creation",
+  "name": "创造harness（harness-creation）",
+  "category": "meta",
+  "version": 7,
+  "parent_version_id": "harness-creation",
+  "evolution_reason": "补充说明 evolve_harness 支持两种模式（追加模式和覆盖模式），让模型知道何时用哪种模式。",
+  "evolution_direction": "当新领域 harness 变得臃肿、重复或方向偏移时，优先用 rewrite 模式重构，而不是继续追加。",
+  "tags": [
+    "harness-creation",
+    "meta",
+    "创建",
+    "判断框架",
+    "医学",
+    "心理咨询",
+    "教育",
+    "文学",
+    "模板",
+    "法律",
+    "金融",
+    "领域"
+  ],
+  "track": "harness",
+  "created_at": "2026-05-04T05:31:30.191036+00:00",
+  "api_config_name": "",
+  "status": "active"
+}

@@ -1,0 +1,8 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/statusline.mjs\"",
+    "padding": 1,
+    "refreshInterval": 2
+  }
+}

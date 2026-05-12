@@ -1,0 +1,18 @@
+{
+  "name": "jue-agent-runtime",
+  "version": "0.1.0",
+  "description": "Jue judgment runtime for Claude Code and agent adapters.",
+  "type": "module",
+  "private": true,
+  "license": "LicenseRef-PolyForm-Noncommercial-1.0.0",
+  "scripts": {
+    "test": "node --test",
+    "validate:plugin": "claude plugin validate .",
+    "jue": "node scripts/jue-admin.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {}
+}

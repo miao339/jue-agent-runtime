@@ -1,0 +1,20 @@
+{
+  "name": "jue",
+  "version": "0.1.0",
+  "description": "Jue / Harness3 judgment system: ROOT, SOUL, triplets, active harness injection, and evolution tools for Claude Code.",
+  "author": {
+    "name": "River"
+  },
+  "keywords": [
+    "jue",
+    "harness",
+    "judgment",
+    "claude-code"
+  ],
+  "agents": [
+    "./agents/jue.md"
+  ],
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
+}
